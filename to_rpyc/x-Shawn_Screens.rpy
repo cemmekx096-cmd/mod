@@ -193,7 +193,7 @@ screen modmenu():
                         text "Textbox opacity: {}%".format(int(persistent.dialogueBoxOpacity * 100))
                         text "Show quick menu:"
                         text "Skip game startup splash screen:"
-                        text "Language:"
+                        text "Bahasa Indonesia:"
                         text "CHEATS"
 
                     vbox:
@@ -215,17 +215,10 @@ screen modmenu():
                         else:
                             textbutton "Disabled" style "mod_textbutton" action SetVariable("persistent.mod_skip_splashscreen", True) selected persistent.mod_skip_splashscreen text_style "mod_textbuttonr"
                         
-                        hbox:
-                            spacing 10
-                            if _preferences.language is None:
-                                textbutton "English" style "mod_textbutton" action Language(None) selected True text_style "mod_textbuttong"
-                            else:
-                                textbutton "English" style "mod_textbutton" action Language(None) selected False text_style "mod_textbuttonr"
-                            
-                            if _preferences.language == "id":
-                                textbutton "Indonesia" style "mod_textbutton" action Language("id") selected True text_style "mod_textbuttong"
-                            else:
-                                textbutton "Indonesia" style "mod_textbutton" action Language("id") selected False text_style "mod_textbuttonr"
+                        if _preferences.language == "id":
+                            textbutton "Enabled" style "mod_textbutton" action Language(None) selected True text_style "mod_textbuttong"
+                        else:
+                            textbutton "Disabled" style "mod_textbutton" action Language("id") selected False text_style "mod_textbuttonr"
                         
                         if mod_show_cheats:
                             textbutton "Enabled" action SetVariable("mod_show_cheats", False) selected mod_show_cheats text_style "mod_textbuttong"
