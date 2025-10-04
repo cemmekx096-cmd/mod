@@ -17550,5 +17550,5 @@ translate id strings:
     old "\"I love you!\"(Dialouge/render changes only)"
     new "\"Aku cinta kamu!\"(Dialouge/render changes only)"
 
-    old "\"Take it!\"
-    new "\"Ambillah \"
+    old "\"Take it!\""
+    new "\"Ambillah!\""
