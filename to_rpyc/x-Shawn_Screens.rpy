@@ -215,10 +215,12 @@ screen modmenu():
                         else:
                             textbutton "Disabled" style "mod_textbutton" action SetVariable("persistent.mod_skip_splashscreen", True) selected persistent.mod_skip_splashscreen text_style "mod_textbuttonr"
                         
-                        if _preferences.language == "id":
-                            textbutton "Enabled" style "mod_textbutton" action Language(None) selected True text_style "mod_textbuttong"
+                        textbutton "KLIK DISINI" action [Language("id"), renpy.utter_restart] text_idle_color "#FF0000" text_hover_color "#00FF00" text_size 30
+                        
+                        if mod_show_cheats:
+                            textbutton "Enabled" action SetVariable("mod_show_cheats", False) selected mod_show_cheats text_style "mod_textbuttong"
                         else:
-                            textbutton "Disabled" style "mod_textbutton" action Language("id") selected False text_style "mod_textbuttonr"
+                            textbutton "Disabled" action SetVariable("mod_show_cheats", True) selected mod_show_cheats text_style "mod_textbuttonr"
                         
                         if mod_show_cheats:
                             textbutton "Enabled" action SetVariable("mod_show_cheats", False) selected mod_show_cheats text_style "mod_textbuttong"
