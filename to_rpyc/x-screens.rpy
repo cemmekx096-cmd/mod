@@ -904,11 +904,12 @@ init -501 screen preferences():
         textbutton _("Enable") action SetVariable("config.hw_video", True) ypos 450 xpos 250
         textbutton _("Disable") action SetVariable("config.hw_video", False) ypos 450 xpos 250
 
+    ## LANGUAGE SELECTOR - TAMBAHAN BARU
     vbox:
         style_prefix "radio"
         label _("Language") ypos 550 xpos 250
-        textbutton _("English") action [Function(set_language, None), Return()] ypos 550 xpos 250
-        textbutton _("Bahasa Indonesia") action [Function(set_language, "id"), Return()] ypos 550 xpos 250
+        textbutton _("English") action Function(set_language, None) ypos 550 xpos 250
+        textbutton _("Bahasa Indonesia") action Function(set_language, "id") ypos 550 xpos 250
 
     label _("Text Box Opacity: " + str(int(persistent.say_window_alpha*100)) + "%") xpos 500 ypos 150
 

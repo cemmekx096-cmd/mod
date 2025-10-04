@@ -43,14 +43,25 @@ define config.save_directory = "PaCaGame-1554919452"
 define config.window_icon = "gui/icon.png"
 
 init python:
+    ## Set bahasa default ke English saat pertama kali
+    if persistent.language is None:
+        persistent.language = None  # None = English (default)
+    
     ## Fungsi untuk mengganti bahasa
     def set_language(lang):
         """Fungsi untuk mengganti bahasa game"""
-        renpy.change_language(lang)
-        # Simpan pilihan bahasa ke persistent
-        persistent.language = lang
-        # Restart untuk memuat bahasa baru
-        renpy.utter_restart()
+        try:
+            # Set bahasa baru
+            renpy.change_language(lang)
+            # Simpan ke persistent
+            persistent.language = lang
+            # Reload game agar bahasa langsung aktif
+            renpy.save_persistent()
+        except Exception as e:
+            # Jika error, tetap di English
+            renpy.change_language(None)
+            persistent.language = None
+            renpy.notify("Language file not found, using English")
 
     build.classify('**~', None)
     build.classify('**.bak', None)
