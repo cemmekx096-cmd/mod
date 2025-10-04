@@ -20047,7 +20047,7 @@ translate id strings:
     new "Buat dia berbicara tentang dirinya dan keberhasilan hidupnya."
 
     old "Get Ian's help on the down low. Have him \"occupy\"Waktu Emma."
-    new "Get Ian's help on the down low. Have him \"
+    new "Minta bantuan Ian secara diam-diam. Minta dia"
 
     old "Take a lark on a more direct approach. Ask Dr. Chuck to excuse Emma for the rest of the night."
     new "Ambil lark pada pendekatan yang lebih langsung. Mintalah Dr. Chuck untuk memaafkan Emma untuk sisa malam itu."

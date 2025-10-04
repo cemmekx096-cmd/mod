@@ -17533,7 +17533,7 @@ translate id strings:
     new "Pick up the speed.(Dialouge/render changes only)"
 
     old "\"Say my name, bitch.\"(w3minasaymyname = true)"
-    new "\"
+    new "\"Sebutkan namaku, jalang.\"(w3minasaymyname = true)"
 
     old "Wordlessly take her.(Dialouge/render changes only)"
     new "Wordlessly take her.(Dialouge/render changes only)"
@@ -17548,7 +17548,7 @@ translate id strings:
     new "Menghancurkan!"
 
     old "\"I love you!\"(Dialouge/render changes only)"
-    new "\"
+    new "\"Aku cinta kamu!\"(Dialouge/render changes only)"
 
-    old "\"Take it!\""
-    new "\"
+    old "\"Take it!\"
+    new "\"Ambillah \"
