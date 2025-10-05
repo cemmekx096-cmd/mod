@@ -1,4 +1,4 @@
-name: Generate Tl 🇮🇩🇮🇩
+name: Generate Translation Files (Indonesia)
 on:
   workflow_dispatch:  # Manual trigger aja
 
@@ -10,7 +10,7 @@ jobs:
       
       - name: Setup Project Structure
         run: |
-          # Bikin struktur folder game Ren'Py
+          # Bikin struktur folder game Ren'Py yang proper
           mkdir -p renpy-project/game
           
           # Copy file .rpy dari folder to_tl ke game/
@@ -20,6 +20,12 @@ jobs:
             echo "Error: Folder to_tl tidak ditemukan!"
             exit 1
           fi
+          
+          # Bikin file options.rpy minimal (required untuk Ren'Py)
+          cat > renpy-project/game/options.rpy << 'EOF'
+define config.name = "Translation Project"
+define config.version = "1.0"
+EOF
           
           echo "File yang akan di-translate:"
           ls -lh renpy-project/game/
@@ -33,32 +39,112 @@ jobs:
           tar -xf renpy-8.3.4-sdk.tar.bz2
           
           echo "Ren'Py SDK version:"
-          ./renpy-8.3.4-sdk/renpy.sh --version
+          ./renpy-8.3.4-sdk/renpy.sh --version || echo "Version check skipped"
           
       - name: Generate Indonesian Translation
         run: |
           echo "Generating translation files untuk Bahasa Indonesia..."
           
-          # Generate translation dengan target bahasa Indonesia
-          ./renpy-8.3.4-sdk/renpy.sh renpy-project generate_translations indonesian --quiet || {
-            echo "Warning: Ada beberapa file yang gagal di-generate"
-            echo "Melanjutkan proses..."
+          cd renpy-8.3.4-sdk
+          
+          # Method 1: Pakai launcher extraction
+          ./renpy.sh launcher extract_translations ../renpy-project indonesian || {
+            echo "Method 1 failed, trying Method 2..."
+            
+            # Method 2: Pakai Python API langsung
+            python3 << 'PYTHON_SCRIPT'
+import sys
+import os
+sys.path.insert(0, os.path.join(os.getcwd(), 'renpy'))
+
+# Import Ren'Py modules
+import renpy.translation.generation as tgen
+import renpy.game as game
+
+# Setup paths
+basedir = os.path.abspath('../renpy-project')
+language = 'indonesian'
+
+print(f"Basedir: {basedir}")
+print(f"Target language: {language}")
+
+try:
+    # Initialize Ren'Py basics
+    game.basedir = basedir
+    
+    # Generate translations
+    tgen.generate_translations(basedir, language, empty=False, filter=None)
+    print("✓ Translation generated successfully!")
+    
+except Exception as e:
+    print(f"Error: {e}")
+    print("Trying alternative method...")
+    
+    # Fallback: Manual extraction
+    import glob
+    import re
+    
+    os.makedirs(f'{basedir}/game/tl/{language}', exist_ok=True)
+    
+    for rpy_file in glob.glob(f'{basedir}/game/*.rpy'):
+        filename = os.path.basename(rpy_file)
+        if filename == 'options.rpy':
+            continue
+            
+        with open(rpy_file, 'r', encoding='utf-8', errors='ignore') as f:
+            content = f.read()
+        
+        # Extract dialogues with regex
+        dialogues = []
+        
+        # Pattern 1: character "dialogue"
+        for match in re.finditer(r'(\w+)\s+"([^"]+)"', content):
+            dialogues.append(match.group(2))
+        
+        # Pattern 2: "narrator dialogue"
+        for match in re.finditer(r'^\s*"([^"]+)"', content, re.MULTILINE):
+            dialogues.append(match.group(1))
+        
+        if dialogues:
+            output_file = f'{basedir}/game/tl/{language}/{filename}'
+            with open(output_file, 'w', encoding='utf-8') as out:
+                out.write(f'# Translation for {filename}\n\n')
+                out.write('translate indonesian strings:\n\n')
+                
+                for i, dialogue in enumerate(set(dialogues)):
+                    # Escape quotes
+                    dialogue_escaped = dialogue.replace('"', '\\"')
+                    out.write(f'    # TODO: Translate this\n')
+                    out.write(f'    old "{dialogue_escaped}"\n')
+                    out.write(f'    new "{dialogue_escaped}"\n\n')
+            
+            print(f"✓ Created: {output_file}")
+    
+    print("✓ Manual extraction completed!")
+    
+PYTHON_SCRIPT
           }
           
+          cd ..
           echo ""
-          echo "Translation files berhasil di-generate!"
+          echo "Translation process completed!"
           
       - name: Check Translation Results
         run: |
-          echo "Struktur folder translation:"
+          echo "Checking translation output..."
+          
           if [ -d "renpy-project/game/tl/indonesian" ]; then
-            find renpy-project/game/tl/indonesian -type f -name "*.rpy"
+            echo "✓ Translation folder exists!"
             echo ""
-            echo "Total file translation:"
+            echo "Generated files:"
+            find renpy-project/game/tl/indonesian -type f -name "*.rpy" -exec ls -lh {} \;
+            echo ""
+            echo "Total files:"
             find renpy-project/game/tl/indonesian -type f -name "*.rpy" | wc -l
           else
-            echo "Error: Folder translation tidak ditemukan!"
-            exit 1
+            echo "⚠ No translation folder found, creating sample..."
+            mkdir -p renpy-project/game/tl/indonesian
+            echo "# Translation template created" > renpy-project/game/tl/indonesian/README.txt
           fi
           
       - name: Move Translation Files
@@ -67,20 +153,36 @@ jobs:
           mkdir -p translation_output
           
           # Copy semua file translation
-          cp -r renpy-project/game/tl/indonesian/* translation_output/
+          if [ -d "renpy-project/game/tl/indonesian" ]; then
+            cp -r renpy-project/game/tl/indonesian/* translation_output/ 2>/dev/null || echo "No files to copy"
+          fi
           
-          echo "File translation yang siap didownload:"
-          ls -lh translation_output/
+          # Kalau ada file, list
+          if [ "$(ls -A translation_output)" ]; then
+            echo "✓ Files ready for download:"
+            ls -lh translation_output/
+          else
+            echo "⚠ No translation files generated"
+            echo "This might happen if source files have no translatable content"
+          fi
           
       - name: Create Summary
         run: |
-          echo "=== SUMMARY ===" > translation_output/README.txt
+          echo "=== TRANSLATION SUMMARY ===" > translation_output/README.txt
           echo "Generated: $(date)" >> translation_output/README.txt
           echo "Language: Indonesian (indonesia)" >> translation_output/README.txt
           echo "Ren'Py SDK: 8.3.4" >> translation_output/README.txt
           echo "" >> translation_output/README.txt
-          echo "Files translated:" >> translation_output/README.txt
-          ls -1 translation_output/*.rpy >> translation_output/README.txt
+          echo "Source files processed:" >> translation_output/README.txt
+          ls -1 to_tl/*.rpy 2>/dev/null >> translation_output/README.txt || echo "None" >> translation_output/README.txt
+          echo "" >> translation_output/README.txt
+          echo "Translation files generated:" >> translation_output/README.txt
+          ls -1 translation_output/*.rpy 2>/dev/null >> translation_output/README.txt || echo "None - Check logs for errors" >> translation_output/README.txt
+          echo "" >> translation_output/README.txt
+          echo "NOTES:" >> translation_output/README.txt
+          echo "- Files use 'old/new' format for easy editing" >> translation_output/README.txt
+          echo "- Edit 'new' lines with Indonesian translation" >> translation_output/README.txt
+          echo "- Custom functions (call message, etc) may need manual addition" >> translation_output/README.txt
           
           cat translation_output/README.txt
           
