@@ -1,0 +1,91 @@
+name: Generate Tl 🇮🇩🇮🇩
+on:
+  workflow_dispatch:  # Manual trigger aja
+
+jobs:
+  generate-translation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Project Structure
+        run: |
+          # Bikin struktur folder game Ren'Py
+          mkdir -p renpy-project/game
+          
+          # Copy file .rpy dari folder to_tl ke game/
+          if [ -d "to_tl" ]; then
+            cp to_tl/*.rpy renpy-project/game/ 2>/dev/null || echo "Tidak ada file .rpy di to_tl/"
+          else
+            echo "Error: Folder to_tl tidak ditemukan!"
+            exit 1
+          fi
+          
+          echo "File yang akan di-translate:"
+          ls -lh renpy-project/game/
+          
+      - name: Install Ren'Py SDK
+        run: |
+          echo "Downloading Ren'Py SDK 8.3.4..."
+          wget -q https://www.renpy.org/dl/8.3.4/renpy-8.3.4-sdk.tar.bz2
+          
+          echo "Extracting SDK..."
+          tar -xf renpy-8.3.4-sdk.tar.bz2
+          
+          echo "Ren'Py SDK version:"
+          ./renpy-8.3.4-sdk/renpy.sh --version
+          
+      - name: Generate Indonesian Translation
+        run: |
+          echo "Generating translation files untuk Bahasa Indonesia..."
+          
+          # Generate translation dengan target bahasa Indonesia
+          ./renpy-8.3.4-sdk/renpy.sh renpy-project generate_translations indonesian --quiet || {
+            echo "Warning: Ada beberapa file yang gagal di-generate"
+            echo "Melanjutkan proses..."
+          }
+          
+          echo ""
+          echo "Translation files berhasil di-generate!"
+          
+      - name: Check Translation Results
+        run: |
+          echo "Struktur folder translation:"
+          if [ -d "renpy-project/game/tl/indonesian" ]; then
+            find renpy-project/game/tl/indonesian -type f -name "*.rpy"
+            echo ""
+            echo "Total file translation:"
+            find renpy-project/game/tl/indonesian -type f -name "*.rpy" | wc -l
+          else
+            echo "Error: Folder translation tidak ditemukan!"
+            exit 1
+          fi
+          
+      - name: Move Translation Files
+        run: |
+          # Bikin folder output
+          mkdir -p translation_output
+          
+          # Copy semua file translation
+          cp -r renpy-project/game/tl/indonesian/* translation_output/
+          
+          echo "File translation yang siap didownload:"
+          ls -lh translation_output/
+          
+      - name: Create Summary
+        run: |
+          echo "=== SUMMARY ===" > translation_output/README.txt
+          echo "Generated: $(date)" >> translation_output/README.txt
+          echo "Language: Indonesian (indonesia)" >> translation_output/README.txt
+          echo "Ren'Py SDK: 8.3.4" >> translation_output/README.txt
+          echo "" >> translation_output/README.txt
+          echo "Files translated:" >> translation_output/README.txt
+          ls -1 translation_output/*.rpy >> translation_output/README.txt
+          
+          cat translation_output/README.txt
+          
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Indonesian-Translation-Files
+          path: translation_output/
+          retention-days: 30
