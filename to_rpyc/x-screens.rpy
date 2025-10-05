@@ -1,3 +1,4 @@
+init offset = -1
 
 
 
@@ -8,71 +9,70 @@
 
 
 
-
-init -1 style default:
+style default:
     properties gui.text_properties()
     language gui.language
     emoji_font None
 
-init -1 style input:
+style input:
     properties gui.text_properties("input", accent=True)
     adjust_spacing False
 
-init -1 style hyperlink_text:
+style hyperlink_text:
     properties gui.text_properties("hyperlink", accent=True)
     hover_underline True
 
-init -1 style gui_text:
+style gui_text:
     properties gui.text_properties("interface")
 
 
-init -1 style button:
+style button:
     properties gui.button_properties("button")
 
-init -1 style button_text is gui_text:
+style button_text is gui_text:
     properties gui.text_properties("button")
     yalign 0.5
 
 
-init -1 style label_text is gui_text:
+style label_text is gui_text:
     properties gui.text_properties("label", accent=True)
 
-init -1 style prompt_text is gui_text:
+style prompt_text is gui_text:
     properties gui.text_properties("prompt")
 
 
-init -1 style bar:
+style bar:
     ysize gui.bar_size
     left_bar Frame("gui/bar/left.png", gui.bar_borders, tile=gui.bar_tile)
     right_bar Frame("gui/bar/right.png", gui.bar_borders, tile=gui.bar_tile)
 
-init -1 style vbar:
+style vbar:
     xsize gui.bar_size
     top_bar Frame("gui/bar/top.png", gui.vbar_borders, tile=gui.bar_tile)
     bottom_bar Frame("gui/bar/bottom.png", gui.vbar_borders, tile=gui.bar_tile)
 
-init -1 style scrollbar:
+style scrollbar:
     ysize gui.scrollbar_size
     base_bar Frame("gui/scrollbar/horizontal_[prefix_]bar.png", gui.scrollbar_borders, tile=gui.scrollbar_tile)
     thumb Frame("gui/scrollbar/horizontal_[prefix_]thumb.png", gui.scrollbar_borders, tile=gui.scrollbar_tile)
 
-init -1 style vscrollbar:
+style vscrollbar:
     xsize gui.scrollbar_size
     base_bar Frame("gui/scrollbar/vertical_[prefix_]bar.png", gui.vscrollbar_borders, tile=gui.scrollbar_tile)
     thumb Frame("gui/scrollbar/vertical_[prefix_]thumb.png", gui.vscrollbar_borders, tile=gui.scrollbar_tile)
 
-init -1 style slider:
+style slider:
     ysize gui.slider_size
     base_bar Frame("gui/slider/horizontal_[prefix_]bar.png", gui.slider_borders, tile=gui.slider_tile)
     thumb "gui/slider/horizontal_[prefix_]thumb.png"
 
-init -1 style vslider:
+style vslider:
     xsize gui.slider_size
     base_bar Frame("gui/slider/vertical_[prefix_]bar.png", gui.vslider_borders, tile=gui.slider_tile)
     thumb "gui/slider/vertical_[prefix_]thumb.png"
 
 
-init -1 style frame:
+style frame:
     padding gui.frame_borders.padding
     background Frame("gui/frame.png", gui.frame_borders, tile=gui.frame_tile)
 
@@ -96,12 +96,12 @@ init -1 style frame:
 
 
 
-init -501 screen textbox2:
+screen textbox2:
     add "gui/textbox2.png" xalign 0.5 yalign 1.0
 
-define -1 persistent.say_window_alpha = 1.0
+define persistent.say_window_alpha = 1.0
 
-init -501 screen qmenu:
+screen qmenu:
     zorder 1000
 
 
@@ -118,7 +118,7 @@ init -501 screen qmenu:
 
 
 
-init -501 screen points():
+screen points():
 
     vbox ypos 0.01 xpos 0.01:
 
@@ -132,7 +132,7 @@ init -501 screen points():
         textbutton "Close" action Hide("points") ypos 0.48
 
 
-init -501 screen say(who, what):
+screen say(who, what):
 
     style_prefix "say"
 
@@ -157,19 +157,19 @@ init -501 screen say(who, what):
 
 
 
-init -1 python:
+init python:
     config.character_id_prefixes.append('namebox')
 
-init -1 style window is default
-init -1 style say_label is default
-init -1 style say_dialogue is default
-init -1 style say_thought is say_dialogue
+style window is default
+style say_label is default
+style say_dialogue is default
+style say_thought is say_dialogue
 
-init -1 style namebox is default
-init -1 style namebox_label is say_label
+style namebox is default
+style namebox_label is say_label
 
 
-init -1 style window:
+style window:
     xalign 0.5
     xfill True
     yalign gui.textbox_yalign
@@ -177,7 +177,7 @@ init -1 style window:
 
 
 
-init -1 style namebox:
+style namebox:
     xpos gui.name_xpos
     xanchor gui.name_xalign
     xsize gui.namebox_width
@@ -187,12 +187,12 @@ init -1 style namebox:
     background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
     padding gui.namebox_borders.padding
 
-init -1 style say_label:
+style say_label:
     properties gui.text_properties("name", accent=True)
     xalign gui.name_xalign
     yalign 0.5
 
-init -1 style say_dialogue:
+style say_dialogue:
     properties gui.text_properties("dialogue")
 
     xpos gui.dialogue_xpos
@@ -210,7 +210,7 @@ init -1 style say_dialogue:
 
 
 
-init -501 screen input(prompt):
+screen input(prompt):
     style_prefix "input"
 
     window:
@@ -224,13 +224,13 @@ init -501 screen input(prompt):
         text prompt style "input_prompt"
         input id "input"
 
-init -1 style input_prompt is default
+style input_prompt is default
 
-init -1 style input_prompt:
+style input_prompt:
     xalign gui.dialogue_text_xalign
     properties gui.text_properties("input_prompt")
 
-init -1 style input:
+style input:
     xalign gui.dialogue_text_xalign
     xmaximum gui.dialogue_width
 
@@ -243,7 +243,7 @@ init -1 style input:
 
 
 
-init -501 screen choice(items):
+screen choice(items):
     style_prefix "choice"
 
     vbox:
@@ -253,27 +253,27 @@ init -501 screen choice(items):
 
 
 
-define -1 config.narrator_menu = True
+define config.narrator_menu = True
 
 
-init -1 style choice_vbox is vbox
-init -1 style choice_button is button
-init -1 style choice_button_text is button_text
+style choice_vbox is vbox
+style choice_button is button
+style choice_button_text is button_text
 
-init -1 style choice_vbox:
+style choice_vbox:
     xalign 0.5
     ypos 500
     yanchor 0.5
 
     spacing gui.choice_spacing
 
-init -1 style choice_button is default:
+style choice_button is default:
     properties gui.button_properties("choice_button")
     hover_sound "sound effects/click.wav"
     activate_sound "sound effects/click2.wav"
 
 
-init -1 style choice_button_text is default:
+style choice_button_text is default:
     properties gui.button_text_properties("choice_button")
 
 
@@ -282,7 +282,7 @@ init -1 style choice_button_text is default:
 
 
 
-init -501 screen quick_menu():
+screen quick_menu():
 
 
     zorder 100
@@ -290,7 +290,7 @@ init -501 screen quick_menu():
 
 
 
-init -501 screen qmenutextdisplay:
+screen qmenutextdisplay:
 
     key "hide_windows" action NullAction()
     zorder 100
@@ -306,18 +306,18 @@ init -501 screen qmenutextdisplay:
 
 
 
-init -1 python:
+init python:
     config.overlay_screens.append("quick_menu")
 
-default -1 quick_menu = True
-default -1 qmenu = True
-init -1 style quick_button is default
-init -1 style quick_button_text is button_text
+default quick_menu = True
+default qmenu = True
+style quick_button is default
+style quick_button_text is button_text
 
-init -1 style quick_button:
+style quick_button:
     properties gui.button_properties("quick_button")
 
-init -1 style quick_button_text:
+style quick_button_text:
     properties gui.button_text_properties("quick_button")
 
 
@@ -334,7 +334,7 @@ init -1 style quick_button_text:
 
 
 
-init -501 screen navigation():
+screen navigation():
     tag nav_screen
     on "show" action Play("menu_click", "sound effects/page-turn.wav")
 
@@ -474,14 +474,14 @@ init -501 screen navigation():
 
 
 
-init -1 style navigation_button is gui_button
-init -1 style navigation_button_text is gui_button_text
+style navigation_button is gui_button
+style navigation_button_text is gui_button_text
 
-init -1 style navigation_button:
+style navigation_button:
     size_group "navigation"
     properties gui.button_properties("navigation_button")
 
-init -1 style navigation_button_text:
+style navigation_button_text:
     properties gui.button_text_properties("navigation_button")
     font "gui/fonts/FIGHTT3_.ttf"
     idle_color "#000"
@@ -499,7 +499,7 @@ init -1 style navigation_button_text:
 
 
 
-init -501 screen main_menu():
+screen main_menu():
     tag menu
 
     add "gui/screens/backgrounds/main_menu.png"
@@ -527,7 +527,7 @@ init -501 screen main_menu():
 
 
 
-init -501 screen game_menu(title, scroll=None, yinitial=0.0):
+screen game_menu(title, scroll=None, yinitial=0.0):
 
     style_prefix "game_menu"
 
@@ -586,47 +586,47 @@ init -501 screen game_menu(title, scroll=None, yinitial=0.0):
         key "game_menu" action ShowMenu("main_menu")
 
 
-init -1 style game_menu_outer_frame is empty
-init -1 style game_menu_navigation_frame is empty
-init -1 style game_menu_content_frame is empty
-init -1 style game_menu_viewport is gui_viewport
-init -1 style game_menu_side is gui_side
-init -1 style game_menu_scrollbar is gui_vscrollbar
-init -1 style return_button is navigation_button
-init -1 style return_button_text is navigation_button_text
+style game_menu_outer_frame is empty
+style game_menu_navigation_frame is empty
+style game_menu_content_frame is empty
+style game_menu_viewport is gui_viewport
+style game_menu_side is gui_side
+style game_menu_scrollbar is gui_vscrollbar
+style return_button is navigation_button
+style return_button_text is navigation_button_text
 
-init -1 style game_menu_outer_frame:
+style game_menu_outer_frame:
     bottom_padding 45
     top_padding 180
 
-init -1 style game_menu_navigation_frame:
+style game_menu_navigation_frame:
     xsize 420
     yfill False
 
-init -1 style game_menu_content_frame:
+style game_menu_content_frame:
     left_margin 60
     right_margin 30
     top_margin 15
 
-init -1 style game_menu_viewport:
+style game_menu_viewport:
     xsize 1380
 
-init -1 style game_menu_vscrollbar:
+style game_menu_vscrollbar:
     unscrollable gui.unscrollable
 
-init -1 style game_menu_side:
+style game_menu_side:
     spacing 15
 
-init -1 style game_menu_label:
+style game_menu_label:
     xpos 100000
     ysize 180
 
-init -1 style game_menu_label_text:
+style game_menu_label_text:
     size gui.title_text_size
     color gui.accent_color
     yalign 0.5
 
-init -1 style return_button:
+style return_button:
     xpos 0.465
     ypos 0.94
 
@@ -639,7 +639,7 @@ init -1 style return_button:
 
 
 
-init -501 screen about():
+screen about():
     tag menu
     add "gui/menu/about_screen.png"
     add SnowBlossom("gui/particle.png", count=10, border=50, xspeed=(25, 50), yspeed=-100, start=3, horizontal=False)
@@ -663,14 +663,14 @@ init -501 screen about():
 
 
 
-define -1 gui.about = ""
+define gui.about = ""
 
 
-init -1 style about_label is gui_label
-init -1 style about_label_text is gui_label_text
-init -1 style about_text is gui_text
+style about_label is gui_label
+style about_label_text is gui_label_text
+style about_text is gui_text
 
-init -1 style about_label_text:
+style about_label_text:
     size gui.label_text_size
 
 
@@ -692,7 +692,7 @@ init -1 style about_label_text:
 
 
 
-init -501 screen save():
+screen save():
     tag menu
 
     add "gui/screens/backgrounds/save_screen2.png"
@@ -700,7 +700,7 @@ init -501 screen save():
     imagebutton auto "gui/screens/imagebuttons/return_%s.png" action Return() xpos 10 ypos 22
 
 
-init -501 screen load():
+screen load():
     tag menu
 
     add "gui/screens/backgrounds/load_screen2.png"
@@ -709,7 +709,7 @@ init -501 screen load():
 
 
 
-init -501 screen file_slots(title):
+screen file_slots(title):
 
     default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Auto"), quick=_("Quick"))
 
@@ -807,45 +807,45 @@ init -501 screen file_slots(title):
             value page_name_value
 
 
-init -1 style page_label is gui_label
-init -1 style page_label_text is gui_label_text
-init -1 style page_button is gui_button
-init -1 style page_button_text is gui_button_text
+style page_label is gui_label
+style page_label_text is gui_label_text
+style page_button is gui_button
+style page_button_text is gui_button_text
 
-init -1 style slot_button is gui_button
-init -1 style slot_button_text is gui_button_text
-init -1 style slot_time_text:
+style slot_button is gui_button
+style slot_button_text is gui_button_text
+style slot_time_text:
     size 22
     idle_color "#F080D4b0"
     hover_color "#F080D4"
     hover_bold True
     hover_kerning -2
-init -1 style slot_name_text is slot_button_text
+style slot_name_text is slot_button_text
 
-init -1 style page_label:
+style page_label:
     xpadding 75
     ypadding 5
 
-init -1 style page_label_text:
+style page_label_text:
     text_align 0.5
     color "#e61ab4"
     layout "subtitle"
     hover_color gui.hover_color
 
-init -1 style page_button:
+style page_button:
     properties gui.button_properties("page_button")
 
-init -1 style page_button_text:
+style page_button_text:
     properties gui.button_text_properties("page_button")
 
-init -1 style slot_button:
+style slot_button:
     xysize (108, 108)
 
     idle_background "gui/button/Save-Tab-Unselected.png"
     hover_background "gui/button/Save-Tab-Selected.png"
     selected_idle_background "gui/button/Save-Tab-Selected.png"
 
-init -1 style slot_button_text:
+style slot_button_text:
     font "gui/fonts/LeagueGothic-Regular.otf"
     size 60
     color "#ffffff"
@@ -858,7 +858,7 @@ init -1 style slot_button_text:
 
 
 
-init -501 screen preferences():
+screen preferences():
     tag menu
 
     imagemap:
@@ -904,12 +904,12 @@ init -501 screen preferences():
         textbutton _("Enable") action SetVariable("config.hw_video", True) ypos 450 xpos 250
         textbutton _("Disable") action SetVariable("config.hw_video", False) ypos 450 xpos 250
 
-    ## LANGUAGE SELECTOR - TAMBAHAN BARU
+
     vbox:
         style_prefix "radio"
-        label _("Language") ypos 550 xpos 250
-        textbutton _("English") action Function(set_language, None) ypos 550 xpos 250
-        textbutton _("Bahasa Indonesia") action Function(set_language, "id") ypos 550 xpos 250
+        label _("Language") ypos 600 xpos 150
+        textbutton _("English") action Function(set_language, None) ypos 600 xpos 150
+        textbutton _("Bahasa Indonesia") action Function(set_language, "id") ypos 600 xpos 150
 
     label _("Text Box Opacity: " + str(int(persistent.say_window_alpha*100)) + "%") xpos 500 ypos 150
 
@@ -920,75 +920,75 @@ init -501 screen preferences():
     bar value FieldValue(persistent, 'pref_text_size', range=76, max_is_zero=False, style=u'slider', offset=0, step=1) xsize 475 ysize 41 xpos 500 ypos 400
 
 
-init -1 style pref_label is gui_label
-init -1 style pref_label_text is gui_label_text
-init -1 style pref_vbox is vbox
+style pref_label is gui_label
+style pref_label_text is gui_label_text
+style pref_vbox is vbox
 
-init -1 style radio_label is pref_label
-init -1 style radio_label_text is pref_label_text
-init -1 style radio_button is gui_button
-init -1 style radio_button_text is gui_button_text
-init -1 style radio_vbox is pref_vbox
+style radio_label is pref_label
+style radio_label_text is pref_label_text
+style radio_button is gui_button
+style radio_button_text is gui_button_text
+style radio_vbox is pref_vbox
 
-init -1 style check_label is pref_label
-init -1 style check_label_text is pref_label_text
-init -1 style check_button is gui_button
-init -1 style check_button_text is gui_button_text
-init -1 style check_vbox is pref_vbox
+style check_label is pref_label
+style check_label_text is pref_label_text
+style check_button is gui_button
+style check_button_text is gui_button_text
+style check_vbox is pref_vbox
 
-init -1 style slider_label is pref_label
-init -1 style slider_label_text is pref_label_text
-init -1 style slider_slider is gui_slider
-init -1 style slider_button is gui_button
-init -1 style slider_button_text is gui_button_text
-init -1 style slider_pref_vbox is pref_vbox
+style slider_label is pref_label
+style slider_label_text is pref_label_text
+style slider_slider is gui_slider
+style slider_button is gui_button
+style slider_button_text is gui_button_text
+style slider_pref_vbox is pref_vbox
 
-init -1 style mute_all_button is check_button
-init -1 style mute_all_button_text is check_button_text
+style mute_all_button is check_button
+style mute_all_button_text is check_button_text
 
-init -1 style pref_label:
+style pref_label:
     top_margin gui.pref_spacing
     bottom_margin 3
 
-init -1 style pref_label_text:
+style pref_label_text:
     yalign 1.0
 
-init -1 style pref_vbox:
+style pref_vbox:
     xsize 338
 
-init -1 style radio_vbox:
+style radio_vbox:
     spacing gui.pref_button_spacing
-init -1 style radio_button:
+style radio_button:
     properties gui.button_properties("radio_button")
     foreground "gui/button/radio_[prefix_]foreground.png"
     xsize 150
 
-init -1 style radio_button_text:
+style radio_button_text:
     properties gui.button_text_properties("radio_button")
 
-init -1 style check_vbox:
+style check_vbox:
     spacing gui.pref_button_spacing
 
-init -1 style check_button:
+style check_button:
     properties gui.button_properties("check_button")
     foreground "gui/button/check_[prefix_]foreground.png"
     xsize 175
 
-init -1 style check_button_text:
+style check_button_text:
     properties gui.button_text_properties("check_button")
 
-init -1 style slider_slider:
+style slider_slider:
     xsize 525
 
-init -1 style slider_button:
+style slider_button:
     properties gui.button_properties("slider_button")
     yalign 0.5
     left_margin 15
 
-init -1 style slider_button_text:
+style slider_button_text:
     properties gui.button_text_properties("slider_button")
 
-init -1 style slider_vbox:
+style slider_vbox:
     xsize 675
 
 
@@ -1000,7 +1000,7 @@ init -1 style slider_vbox:
 
 
 
-init -501 screen history():
+screen history():
     tag menu
 
 
@@ -1048,35 +1048,35 @@ init -501 screen history():
 
 
 
-define -1 gui.history_allow_tags = set()
+define gui.history_allow_tags = set()
 
 
-init -1 style history_window is empty
+style history_window is empty
 
-init -1 style history_name is gui_label
-init -1 style history_name_text is gui_label_text
-init -1 style history_text is gui_text
+style history_name is gui_label
+style history_name_text is gui_label_text
+style history_text is gui_text
 
-init -1 style history_text is gui_text
+style history_text is gui_text
 
-init -1 style history_label is gui_label
-init -1 style history_label_text is gui_label_text
+style history_label is gui_label
+style history_label_text is gui_label_text
 
-init -1 style history_window:
+style history_window:
     xfill True
     ysize gui.history_height
 
-init -1 style history_name:
+style history_name:
     xpos gui.history_name_xpos
     xanchor gui.history_name_xalign
     ypos gui.history_name_ypos
     xsize gui.history_name_width
 
-init -1 style history_name_text:
+style history_name_text:
     min_width gui.history_name_width
     text_align gui.history_name_xalign
 
-init -1 style history_text:
+style history_text:
     xpos gui.history_text_xpos
     ypos gui.history_text_ypos
     xanchor gui.history_text_xalign
@@ -1085,10 +1085,10 @@ init -1 style history_text:
     text_align gui.history_text_xalign
     layout ("subtitle" if gui.history_text_xalign else "tex")
 
-init -1 style history_label:
+style history_label:
     xfill True
 
-init -1 style history_label_text:
+style history_label_text:
     xalign 0.5
 
 
@@ -1098,7 +1098,7 @@ init -1 style history_label_text:
 
 
 
-init -501 screen help():
+screen help():
     tag menu
 
     add "gui/menu/help_screen.png"
@@ -1128,7 +1128,7 @@ init -501 screen help():
                 use gamepad_help
 
 
-init -501 screen keyboard_help():
+screen keyboard_help():
 
     hbox:
         label _("Enter")
@@ -1175,7 +1175,7 @@ init -501 screen keyboard_help():
         text _("Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}.")
 
 
-init -501 screen mouse_help():
+screen mouse_help():
 
     hbox:
         label _("Left Click")
@@ -1198,7 +1198,7 @@ init -501 screen mouse_help():
         text _("Rolls forward to later dialogue.")
 
 
-init -501 screen gamepad_help():
+screen gamepad_help():
 
     hbox:
         label _("Right Trigger\nA/Bottom Button")
@@ -1228,24 +1228,24 @@ init -501 screen gamepad_help():
     textbutton _("Calibrate") action GamepadCalibrate()
 
 
-init -1 style help_button is gui_button
-init -1 style help_button_text is gui_button_text
-init -1 style help_label is gui_label
-init -1 style help_label_text is gui_label_text
-init -1 style help_text is gui_text
+style help_button is gui_button
+style help_button_text is gui_button_text
+style help_label is gui_label
+style help_label_text is gui_label_text
+style help_text is gui_text
 
-init -1 style help_button:
+style help_button:
     properties gui.button_properties("help_button")
     xmargin 12
 
-init -1 style help_button_text:
+style help_button_text:
     properties gui.button_text_properties("help_button")
 
-init -1 style help_label:
+style help_label:
     xsize 375
     right_padding 30
 
-init -1 style help_label_text:
+style help_label_text:
     size gui.text_size
     xalign 1.0
     text_align 1.0
@@ -1264,7 +1264,7 @@ init -1 style help_label_text:
 
 
 
-init -501 screen confirm(message, yes_action, no_action):
+screen confirm(message, yes_action, no_action):
 
 
     modal True
@@ -1298,27 +1298,27 @@ init -501 screen confirm(message, yes_action, no_action):
     key "game_menu" action no_action
 
 
-init -1 style confirm_frame is gui_frame
-init -1 style confirm_prompt is gui_prompt
-init -1 style confirm_prompt_text is gui_prompt_text
-init -1 style confirm_button is gui_medium_button
-init -1 style confirm_button_text is gui_medium_button_text
+style confirm_frame is gui_frame
+style confirm_prompt is gui_prompt
+style confirm_prompt_text is gui_prompt_text
+style confirm_button is gui_medium_button
+style confirm_button_text is gui_medium_button_text
 
-init -1 style confirm_frame:
+style confirm_frame:
     background Frame([ "gui/confirm_frame.png", "gui/confirm_frame.png"], gui.confirm_frame_borders, tile=gui.frame_tile)
     padding gui.confirm_frame_borders.padding
     xalign .5
     yalign .5
 
-init -1 style confirm_prompt_text:
+style confirm_prompt_text:
     text_align 0.5
     layout "subtitle"
 
-init -1 style confirm_button:
+style confirm_button:
     properties gui.button_properties("confirm_button")
     xsize 100
 
-init -1 style confirm_button_text:
+style confirm_button_text:
     properties gui.button_text_properties("confirm_button")
 
 
@@ -1329,7 +1329,7 @@ init -1 style confirm_button_text:
 
 
 
-init -501 screen skip_indicator():
+screen skip_indicator():
 
     zorder 100
     style_prefix "skip"
@@ -1347,7 +1347,7 @@ init -501 screen skip_indicator():
 
 
 
-transform -1 delayed_blink(delay, cycle):
+transform delayed_blink(delay, cycle):
     alpha .5
 
     pause delay
@@ -1360,19 +1360,19 @@ transform -1 delayed_blink(delay, cycle):
         repeat
 
 
-init -1 style skip_frame is empty
-init -1 style skip_text is gui_text
-init -1 style skip_triangle is skip_text
+style skip_frame is empty
+style skip_text is gui_text
+style skip_triangle is skip_text
 
-init -1 style skip_frame:
+style skip_frame:
     ypos gui.skip_ypos
     background Frame("gui/skip.png", gui.skip_frame_borders, tile=gui.frame_tile)
     padding gui.skip_frame_borders.padding
 
-init -1 style skip_text:
+style skip_text:
     size gui.notify_text_size
 
-init -1 style skip_triangle:
+style skip_triangle:
 
 
     font "DejaVuSans.ttf"
@@ -1385,7 +1385,7 @@ init -1 style skip_triangle:
 
 
 
-init -501 screen notify(message):
+screen notify(message):
 
     zorder 100
     style_prefix "notify"
@@ -1396,7 +1396,7 @@ init -501 screen notify(message):
     timer 3.25 action Hide('notify')
 
 
-transform -1 notify_appear:
+transform notify_appear:
     on show:
         alpha 0
         linear .25 alpha 1.0
@@ -1404,16 +1404,16 @@ transform -1 notify_appear:
         linear .5 alpha 0.0
 
 
-init -1 style notify_frame is empty
-init -1 style notify_text is gui_text
+style notify_frame is empty
+style notify_text is gui_text
 
-init -1 style notify_frame:
+style notify_frame:
     ypos gui.notify_ypos
 
     background Frame("gui/notify.png", gui.notify_frame_borders, tile=gui.frame_tile)
     padding gui.notify_frame_borders.padding
 
-init -1 style notify_text:
+style notify_text:
     properties gui.text_properties("notify")
 
 
@@ -1424,7 +1424,7 @@ init -1 style notify_text:
 
 
 
-init -501 screen nvl(dialogue, items=None):
+screen nvl(dialogue, items=None):
 
     window:
         style "nvl_window"
@@ -1456,7 +1456,7 @@ init -501 screen nvl(dialogue, items=None):
     add SideImage() xalign 0.0 yalign 1.0
 
 
-init -501 screen nvl_dialogue(dialogue):
+screen nvl_dialogue(dialogue):
 
     for d in dialogue:
 
@@ -1477,29 +1477,29 @@ init -501 screen nvl_dialogue(dialogue):
 
 
 
-define -1 config.nvl_list_length = gui.nvl_list_length
+define config.nvl_list_length = gui.nvl_list_length
 
-init -1 style nvl_window is default
-init -1 style nvl_entry is default
+style nvl_window is default
+style nvl_entry is default
 
-init -1 style nvl_label is say_label
-init -1 style nvl_dialogue is say_dialogue
+style nvl_label is say_label
+style nvl_dialogue is say_dialogue
 
-init -1 style nvl_button is button
-init -1 style nvl_button_text is button_text
+style nvl_button is button
+style nvl_button_text is button_text
 
-init -1 style nvl_window:
+style nvl_window:
     xfill True
     yfill True
 
     background "gui/nvl.png"
     padding gui.nvl_borders.padding
 
-init -1 style nvl_entry:
+style nvl_entry:
     xfill True
     ysize gui.nvl_height
 
-init -1 style nvl_label:
+style nvl_label:
     xpos gui.nvl_name_xpos
     xanchor gui.nvl_name_xalign
     ypos gui.nvl_name_ypos
@@ -1508,7 +1508,7 @@ init -1 style nvl_label:
     min_width gui.nvl_name_width
     text_align gui.nvl_name_xalign
 
-init -1 style nvl_dialogue:
+style nvl_dialogue:
     xpos gui.nvl_text_xpos
     xanchor gui.nvl_text_xalign
     ypos gui.nvl_text_ypos
@@ -1517,7 +1517,7 @@ init -1 style nvl_dialogue:
     text_align gui.nvl_text_xalign
     layout ("subtitle" if gui.nvl_text_xalign else "tex")
 
-init -1 style nvl_thought:
+style nvl_thought:
     xpos gui.nvl_thought_xpos
     xanchor gui.nvl_thought_xalign
     ypos gui.nvl_thought_ypos
@@ -1526,16 +1526,16 @@ init -1 style nvl_thought:
     text_align gui.nvl_thought_xalign
     layout ("subtitle" if gui.nvl_text_xalign else "tex")
 
-init -1 style nvl_button:
+style nvl_button:
     properties gui.button_properties("nvl_button")
     xpos gui.nvl_button_xpos
     xanchor gui.nvl_button_xalign
 
-init -1 style nvl_button_text:
+style nvl_button_text:
     properties gui.button_text_properties("nvl_button")
 
 
-init -501 screen statistics():
+screen statistics():
     tag nav_screen
     imagemap:
 
@@ -1555,7 +1555,7 @@ init -501 screen statistics():
 
 
 
-init -501 screen stats_pcian():
+screen stats_pcian():
     tag stat_menu
     add "gui/screens/backgrounds/stats_pcian.png"
     text "{color=#4169E1}{u}Toughness{/u}:{/color=#4169E1} [toughness]" xpos 0.509 ypos 0.59
@@ -1585,7 +1585,7 @@ init -501 screen stats_pcian():
 
 
 
-init -501 screen stats_mina():
+screen stats_mina():
     tag stat_menu
     add "gui/screens/backgrounds/stats_mina.png"
     if Mina_Affection == 40:
@@ -1596,7 +1596,7 @@ init -501 screen stats_mina():
     text "{color=#DB7093}{u}Bi-curious Score{/u}:{/color=#DB7093} [Mina_BiCurious]" xpos 0.509 ypos 0.67
     text "{u}Relation{/u}: [Mina_Relations]" xpos 0.509 ypos 0.71
 
-init -501 screen stats_hana():
+screen stats_hana():
     tag stat_menu
     add "gui/screens/backgrounds/stats_hana.png"
     if Hana_Affection == 40:
@@ -1607,7 +1607,7 @@ init -501 screen stats_hana():
     text "{u}Relation{/u}: [Hana_Relations]" xpos 0.509 ypos 0.67
 
 
-init -501 screen stats_rosalind():
+screen stats_rosalind():
     tag stat_menu
     add "gui/screens/backgrounds/stats_rosalind.png"
     if Rosalind_Affection == 40:
@@ -1618,7 +1618,7 @@ init -501 screen stats_rosalind():
     text "{u}Relation{/u}: [Rosalind_Relations]" xpos 0.509 ypos 0.67
 
 
-init -501 screen stats_veronica():
+screen stats_veronica():
     tag stat_menu
     add "gui/screens/backgrounds/stats_veronica.png"
     if Veronica_Affection == 40:
@@ -1628,7 +1628,7 @@ init -501 screen stats_veronica():
     text "{color=#800000}{u}Horniness Score{/u}:{/color=#800000} [Veronica_Horniness]" xpos 0.509 ypos 0.63
     text "{u}Relation{/u}: [Veronica_Relations]" xpos 0.509 ypos 0.67
 
-init -501 screen stats_felicia():
+screen stats_felicia():
     tag stat_menu
     add "gui/screens/backgrounds/stats_felicia.png"
     if Felicia_Affection == 40:
@@ -1638,7 +1638,7 @@ init -501 screen stats_felicia():
     text "{color=#F0E68C}{u}Self-confidence Score{/u}:{/color=#F0E68C} [Felicia_Confidence]" xpos 0.509 ypos 0.63
     text "{u}Relation{/u}: [Felicia_Relations]" xpos 0.509 ypos 0.67
 
-init -501 screen stats_kathleen():
+screen stats_kathleen():
     tag stat_menu
     add "gui/screens/backgrounds/stats_kat.png"
     if Kathleen_Affection == 30:
@@ -1649,7 +1649,7 @@ init -501 screen stats_kathleen():
     text "{u}Relation{/u}: [Kathleen_Relations]" xpos 0.509 ypos 0.67
 
 
-init -501 screen stats_chuckaugust():
+screen stats_chuckaugust():
     tag stat_menu
     add "gui/screens/backgrounds/stats_chuckaugust.png"
     if Chuck_Friendship == 10:
@@ -1669,7 +1669,7 @@ init -501 screen stats_chuckaugust():
     if augustTrust == False:
         text "{color=#FF8C00}{u}Trusted by August{/u}:{/color=#FF8C00} No" xpos 0.509 ypos 0.71
 
-init -501 screen stats_misc():
+screen stats_misc():
     tag stat_menu
     add "gui/screens/backgrounds/stats_misc.png"
     text "{color=#33A625}{u}Jacob Friendship Score{/u}:{/color=#33A625} [Jacob_Friendship]" xpos 0.509 ypos 0.59
@@ -1677,7 +1677,7 @@ init -501 screen stats_misc():
     text "{color=#A9A9A9}{u}Samson Friendship Score{/u}:{/color=#A9A9A9} [Sam_Friendship]" xpos 0.509 ypos 0.67
 
 
-init -501 screen profile_hub():
+screen profile_hub():
     tag nav_screen
     add "gui/screens/backgrounds/profile_hub.png"
 
@@ -1881,7 +1881,7 @@ init -501 screen profile_hub():
 
 
 
-init -501 screen profile_august():
+screen profile_august():
     tag profile_screen
     if met_august == True:
         add "gui/screens/backgrounds/profile_august.png"
@@ -1892,7 +1892,7 @@ init -501 screen profile_august():
     else:
         add "gui/screens/backgrounds/profile_august_unknown.png"
 
-init -501 screen profile_chuck():
+screen profile_chuck():
     tag profile_screen
     add "gui/screens/backgrounds/profile_chuck.png"
     fixed xmaximum 920:
@@ -1900,7 +1900,7 @@ init -501 screen profile_chuck():
         ypos 690
         text "[history_chuck]"
 
-init -501 screen profile_felicia():
+screen profile_felicia():
     tag profile_screen
 
     if met_felicia == True:
@@ -1913,7 +1913,7 @@ init -501 screen profile_felicia():
         add "gui/screens/backgrounds/profile_felicia_unknown.png"
 
 
-init -501 screen profile_hana():
+screen profile_hana():
     tag profile_screen
 
     if met_hana == True and hanaGF == True:
@@ -1932,7 +1932,7 @@ init -501 screen profile_hana():
         add "gui/screens/backgrounds/profile_hana_unknown.png"
 
 
-init -501 screen profile_isaak():
+screen profile_isaak():
     tag profile_screen
 
     if met_isaak == True:
@@ -1944,7 +1944,7 @@ init -501 screen profile_isaak():
     else:
         add "gui/screens/backgrounds/profile_isaak_unknown.png"
 
-init -501 screen profile_jacob():
+screen profile_jacob():
     tag profile_screen
 
     if met_jacob == True:
@@ -1956,7 +1956,7 @@ init -501 screen profile_jacob():
     else:
         add "gui/screens/backgrounds/profile_jacob_unknown.png"
 
-init -501 screen profile_kathleen():
+screen profile_kathleen():
     tag profile_screen
 
     if met_kathleen == True:
@@ -1969,7 +1969,7 @@ init -501 screen profile_kathleen():
         add "gui/screens/backgrounds/profile_kathleen_unknown.png"
 
 
-init -501 screen profile_killian():
+screen profile_killian():
     tag profile_screen
     add "gui/screens/backgrounds/profile_killian.png"
     fixed xmaximum 920:
@@ -1978,7 +1978,7 @@ init -501 screen profile_killian():
         text "[history_killian]"
 
 
-init -501 screen profile_lucy():
+screen profile_lucy():
     tag profile_screen
 
     if met_lucy == True and lucyProstitute == True:
@@ -1997,7 +1997,7 @@ init -501 screen profile_lucy():
     if met_lucy == False and lucyProstitute == False:
         add "gui/screens/backgrounds/profile_lucy_unknown.png"
 
-init -501 screen profile_mina():
+screen profile_mina():
     tag profile_screen
 
     if met_mina == True:
@@ -2009,7 +2009,7 @@ init -501 screen profile_mina():
     else:
         add "gui/screens/backgrounds/profile_mina_unknown.png"
 
-init -501 screen profile_rosalind():
+screen profile_rosalind():
     tag profile_screen
 
     if met_rosalind == True:
@@ -2021,7 +2021,7 @@ init -501 screen profile_rosalind():
     else:
         add "gui/screens/backgrounds/profile_rosalind_unknown.png"
 
-init -501 screen profile_samson():
+screen profile_samson():
     tag profile_screen
 
     if met_samson == True:
@@ -2033,7 +2033,7 @@ init -501 screen profile_samson():
     else:
         add "gui/screens/backgrounds/profile_samson_unknown.png"
 
-init -501 screen profile_veronica():
+screen profile_veronica():
     tag profile_screen
 
     if met_veronica == True:
@@ -2045,7 +2045,7 @@ init -501 screen profile_veronica():
     else:
         add "gui/screens/backgrounds/profile_veronica_unknown.png"
 
-init -501 screen profile_victoria():
+screen profile_victoria():
     tag profile_screen
     add "gui/screens/backgrounds/profile_victoria.png"
     fixed xmaximum 920:
@@ -2053,7 +2053,7 @@ init -501 screen profile_victoria():
         ypos 690
         text "[history_victoria]"
 
-init -501 screen profile_warren():
+screen profile_warren():
     tag profile_screen
 
     if met_warren == True:
@@ -2065,7 +2065,7 @@ init -501 screen profile_warren():
     else:
         add "gui/screens/backgrounds/profile_warren_unknown.png"
 
-init -501 screen profile_spider():
+screen profile_spider():
     tag profile_screen
 
     if met_spider == True:
@@ -2077,7 +2077,7 @@ init -501 screen profile_spider():
     else:
         add "gui/screens/backgrounds/profile_spider_unknown.png"
 
-init -501 screen profile_dalia():
+screen profile_dalia():
     tag profile_screen
 
     if met_dalia == True:
@@ -2089,7 +2089,7 @@ init -501 screen profile_dalia():
     else:
         add "gui/screens/backgrounds/profile_dalia_unknown.png"
 
-init -501 screen profile_harper():
+screen profile_harper():
     tag profile_screen
 
     if met_harper == True:
@@ -2101,7 +2101,7 @@ init -501 screen profile_harper():
     else:
         add "gui/screens/backgrounds/profile_harper_unknown.png"
 
-init -501 screen profile_jerrica():
+screen profile_jerrica():
     tag profile_screen
 
     if met_jerrica == True:
@@ -2113,7 +2113,7 @@ init -501 screen profile_jerrica():
     else:
         add "gui/screens/backgrounds/profile_jerrica_unknown.png"
 
-init -501 screen profile_grace():
+screen profile_grace():
     tag profile_screen
 
     if met_grace == True:
@@ -2125,7 +2125,7 @@ init -501 screen profile_grace():
     else:
         add "gui/screens/backgrounds/profile_grace_unknown.png"
 
-init -501 screen profile_abel():
+screen profile_abel():
     tag profile_screen
 
     if met_abel == True:
@@ -2137,7 +2137,7 @@ init -501 screen profile_abel():
     else:
         add "gui/screens/backgrounds/profile_abel_unknown.png"
 
-init -501 screen profile_sophia():
+screen profile_sophia():
     tag profile_screen
 
     if met_sophia == True:
@@ -2149,7 +2149,7 @@ init -501 screen profile_sophia():
     else:
         add "gui/screens/backgrounds/profile_sophia_unknown.png"
 
-init -501 screen credits():
+screen credits():
     tag menu
     modal True
 
@@ -2176,7 +2176,7 @@ init -501 screen credits():
             text "Thanks to everyone who reads our game, but a special thanks to the following club owners: \n\nMasterSav \nRodney \nMETDeath \nsauron93 \nSen \nShdwB \nMerky \nStone Forest\nnotVVLX\nJibXorz\n...and the many more unnamed. Please contact us on our discord or on Patreon to be added."
 
 
-init -501 screen thanksforplaying():
+screen thanksforplaying():
     modal True
     add "gui/screens/backgrounds/thanks.png"
     textbutton "Save Game" action [ Play ("menu_click","sound effects/page-turn.wav"), ShowMenu('save')] xpos 0.51 ypos 0.4
@@ -2185,6 +2185,6 @@ init -501 screen thanksforplaying():
     textbutton "Support Us on Patreon" action OpenURL("https://www.patreon.com/GIL3D") xpos 0.51 ypos 0.49
     textbutton "Exit Game" action Quit(confirm=False) xpos 0.51 ypos 0.52
 
-init -501 screen camcorder():
+screen camcorder():
     add "camcorder"
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

@@ -17,7 +17,7 @@ from datetime import datetime
 # ================ CONFIG ================
 BAHASA_ASAL = "en"                  # Bahasa sumber
 BAHASA_TUJUAN = "id"                # Bahasa target
-JEDA_TERJEMAH = 0.1                 # Delay antar terjemahan (detik)
+JEDA_TERJEMAH = 0                  # Delay antar terjemahan (detik)
 LOG_LEVEL = "ERROR"                 # Options: ALL, ERROR, SUMMARY
 # ========================================
 
