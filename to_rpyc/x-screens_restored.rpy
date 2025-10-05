@@ -74,8 +74,8 @@ translate Id strings:
     old "Bahasa Indonesia"
     new "Bahasa Indonesia"
 
-    old "Text Box Opacity: " + str(int(persistent.say_window_alpha*10"
-    new "Opacity kotak teks:" + str(int(persistent.say_window_alpha*10"
+    old old "Text Box Opacity: " + str(int(persistent.say_window_alpha*10))
+    new "Opacity kotak teks:" + str(int(persistent.say_window_alpha*10))
 
     old "Text Size:  [persistent.pref_text_size]"
     new "Ukuran teks: [persistent.pref_text_size]"
