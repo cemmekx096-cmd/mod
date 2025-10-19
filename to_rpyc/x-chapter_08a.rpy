@@ -10372,7 +10372,7 @@ translate Id strings:
     new "Kesempurnaan adalah musuh {i}kemajuan{/i}"
 
     old "I don't want to be just \"good enough\""
-    new "I don't want to be just \"
+    new "Saya tidak ingin hanya menjadi \"cukup baik\""
 
     old "The situation is worrisome"
     new "Situasinya mengkhawatirkan"
