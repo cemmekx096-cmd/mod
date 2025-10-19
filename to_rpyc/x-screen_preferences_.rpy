@@ -1,5 +1,16 @@
+
+
+
+
+
+
+
+
+
+
 init -501 screen preferences():
     tag menu
+
 
     use game_menu(_("Settings")):
         vbox:
@@ -11,17 +22,19 @@ init -501 screen preferences():
                 box_wrap True
 
                 if renpy.variant("pc"):
+
                     vbox:
                         style_prefix "radio"
                         label _("Display")
                         textbutton _("Window") action Preference("display", "window")
                         textbutton _("Fullscreen") action Preference("display", "fullscreen")
-
+                        
                 vbox:
                     style_prefix "radio"
                     label _("Language")
                     textbutton _("English") action Language(None)
                     textbutton _("Indonesia") action Language("id")
+        
 
                 vbox:
                     style_prefix "radio"
@@ -61,7 +74,7 @@ init -501 screen preferences():
                     textbutton _("Enabled") action [SetField(persistent, "gallery_force_unlock", True)]
                     textbutton _("Disabled") action [SetField(persistent, "gallery_force_unlock", False)]
 
-            null height 60
+            null height (4 * gui.pref_spacing)
 
             hbox:
                 style_prefix "slider"
@@ -95,7 +108,7 @@ init -501 screen preferences():
                                 textbutton _("Test") action Play("voice", config.sample_voice)
 
                     if config.has_music or config.has_sound or config.has_voice:
-                        null height 15
+                        null height gui.pref_spacing
                         textbutton _("Mute All"):
                             action Preference("all mute", "toggle")
                             style "mute_all_button"
@@ -128,7 +141,7 @@ init -1 style mute_all_button is check_button
 init -1 style mute_all_button_text is check_button_text
 
 init -1 style pref_label:
-    top_margin 15
+    top_margin gui.pref_spacing
     bottom_margin 3
 
 init -1 style pref_label_text:
@@ -138,7 +151,7 @@ init -1 style pref_vbox:
     xsize 338
 
 init -1 style radio_vbox:
-    spacing 0
+    spacing gui.pref_button_spacing
 
 init -1 style radio_button:
     properties gui.button_properties("radio_button")
@@ -148,7 +161,7 @@ init -1 style radio_button_text:
     properties gui.button_text_properties("radio_button")
 
 init -1 style check_vbox:
-    spacing 0
+    spacing gui.pref_button_spacing
 
 init -1 style check_button:
     properties gui.button_properties("check_button")
@@ -170,3 +183,4 @@ init -1 style slider_button_text:
 
 init -1 style slider_vbox:
     xsize 675
+# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
