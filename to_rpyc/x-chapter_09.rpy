@@ -11125,7 +11125,7 @@ translate Id strings:
     new "Ayo bermain"
 
     old "\"I drink to forget...\""
-    new "\"
+    new "\"Saya minum untuk melupakan...\""
 
     old "A hairy asshole"
     new "Bajingan berbulu"
@@ -11143,19 +11143,19 @@ translate Id strings:
     new "Kehamilan yang tidak diinginkan"
 
     old "\"What ended my last relationship?\""
-    new "\"
+    new "\"Apa yang mengakhiri hubungan terakhirku?\""
 
     old "My dick"
     new "penisku"
 
     old "\"What are my parents hiding from me?\""
-    new "\"
+    new "\"Apa yang orang tuaku sembunyikan dariku?\""
 
     old "A dead mime"
     new "Pantomim yang sudah mati"
 
     old "\"While having sex I like to think about...\""
-    new "\"
+    new "\"Saat berhubungan seks, saya suka memikirkan...\""
 
     old "Worshiping that pussy"
     new "Menyembah vagina itu"
