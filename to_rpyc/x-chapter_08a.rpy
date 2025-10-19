@@ -10537,7 +10537,7 @@ translate Id strings:
     new "{image=icon_friend.webp}Maafkan Ian"
 
     old "Play {i}\"Broken Dreams\"{/i}"
-    new "Play {i}\"
+    new "Mainkan {i}\"Mimpi yang Hancur\"{/i}"
 
     old "Play {i}\"Shine Again\"{/i}"
-    new "Play {i}\"
+    new "Mainkan {i}\"Bersinar Lagi\"{/i}"
