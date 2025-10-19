@@ -2,10 +2,20 @@
 ## Menu Mod untuk ganti bahasa - AUTO INJECT ke Preferences
 ## Tinggal letakkan file ini di folder game/, langsung jalan!
 
-init -100 python:
-    # Set default language ke Indonesia saat pertama kali main
-    if persistent.language is None:
-        renpy.change_language("id")
+## Set default language ke Indonesia
+define config.language = "id"
+
+init python:
+    # Set default language saat game start (bukan saat init)
+    def set_default_language():
+        if persistent.language is None:
+            try:
+                renpy.change_language("id")
+            except:
+                pass
+    
+    # Jalankan setelah game benar-benar start
+    config.start_callbacks.append(set_default_language)
 
 ## Screen untuk popup/tab menu Mod Language
 screen mod_language_popup():
