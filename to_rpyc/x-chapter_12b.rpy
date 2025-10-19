@@ -18139,7 +18139,7 @@ translate Id strings:
     new "{image=icon_broken.webp}Ini tidak dibuat untuk saya"
 
     old "You're missing {i}\"please\"{/i}"
-    new "You're missing {i}\"
+    new "Kamu hilang {i}\"tolong\"{/i}"
 
     old "{image=icon_mad.webp}Leave me alone"
     new "{image=icon_mad.webp}Tinggalkan aku sendiri"
