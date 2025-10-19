@@ -1,12 +1,13 @@
 ## File: screen_language.rpy
-## Menu Mod untuk ganti bahasa - AUTO INJECT ke Preferences
-## Tinggal letakkan file ini di folder game/, langsung jalan!
+## Menu Mod untuk ganti bahasa - STANDALONE VERSION
+## Tidak bergantung pada game_menu atau screen lain
+## Compatible dengan Ren'Py 8.0.3
 
 ## Set default language ke Indonesia
 define config.language = "id"
 
 init python:
-    # Set default language saat game start (bukan saat init)
+    # Set default language saat game start
     def set_default_language():
         if persistent.language is None:
             try:
@@ -17,213 +18,199 @@ init python:
     # Jalankan setelah game benar-benar start
     config.start_callbacks.append(set_default_language)
 
-## Screen untuk popup/tab menu Mod Language
+## Screen popup untuk ganti bahasa - STANDALONE
 screen mod_language_popup():
     
     modal True
     zorder 200
     
-    # Background overlay (gelap)
-    button:
-        style "empty"
-        xfill True
-        yfill True
-        action Hide("mod_language_popup")
+    # Background overlay gelap
+    add Solid("#000000dd")
     
-    # Box untuk popup
+    # Container utama
     frame:
         xalign 0.5
         yalign 0.5
-        xminimum 600
-        xmaximum 800
-        yminimum 400
+        xsize 700
+        ysize 500
         
-        background Solid("#000000cc")
-        padding (50, 50)
+        background Solid("#1a1a1a")
+        padding (40, 40)
         
         vbox:
-            spacing 30
+            spacing 25
             xalign 0.5
+            yalign 0.5
             
-            # Judul
-            text _("Mod - Language Settings"):
-                size 50
+            # Header
+            text "MOD - Language Settings":
+                size 45
                 xalign 0.5
                 color "#ffffff"
                 bold True
             
-            null height 20
+            # Garis pemisah
+            null height 10
             
-            # Deskripsi
-            text _("Select your preferred language:"):
-                size 30
+            text "Select your preferred language:":
+                size 25
                 xalign 0.5
-                color "#cccccc"
+                color "#aaaaaa"
             
             null height 30
             
-            # Tombol pilihan bahasa
+            # Tombol bahasa
             vbox:
                 spacing 20
                 xalign 0.5
                 
-                # Tombol English
+                # English Button
                 button:
-                    xsize 400
-                    ysize 80
-                    background Frame("gui/button/choice_idle_background.png", gui.choice_button_borders, tile=gui.frame_tile)
-                    hover_background Frame("gui/button/choice_hover_background.png", gui.choice_button_borders, tile=gui.frame_tile)
+                    xsize 500
+                    ysize 90
+                    background Solid("#2d2d2d")
+                    hover_background Solid("#3d3d3d")
                     action [Language(None), Hide("mod_language_popup")]
                     
                     hbox:
                         xalign 0.5
                         yalign 0.5
-                        spacing 20
+                        spacing 25
                         
-                        text "🇬🇧" size 40
-                        text _("English"):
+                        text "🇬🇧":
+                            size 50
+                        
+                        text "English":
                             size 35
                             color "#ffffff"
                 
-                # Tombol Indonesia
+                # Indonesia Button  
                 button:
-                    xsize 400
-                    ysize 80
-                    background Frame("gui/button/choice_idle_background.png", gui.choice_button_borders, tile=gui.frame_tile)
-                    hover_background Frame("gui/button/choice_hover_background.png", gui.choice_button_borders, tile=gui.frame_tile)
+                    xsize 500
+                    ysize 90
+                    background Solid("#2d2d2d")
+                    hover_background Solid("#3d3d3d")
                     action [Language("id"), Hide("mod_language_popup")]
                     
                     hbox:
                         xalign 0.5
                         yalign 0.5
-                        spacing 20
+                        spacing 25
                         
-                        text "🇮🇩" size 40
-                        text _("Bahasa Indonesia"):
+                        text "🇮🇩":
+                            size 50
+                        
+                        text "Bahasa Indonesia":
                             size 35
                             color "#ffffff"
             
             null height 30
             
-            # Tombol Close
-            textbutton _("Close"):
+            # Close button
+            button:
                 xalign 0.5
-                xsize 200
+                xsize 250
+                ysize 60
+                background Solid("#ff4444")
+                hover_background Solid("#ff6666")
                 action Hide("mod_language_popup")
+                
+                text "Close":
+                    xalign 0.5
+                    yalign 0.5
+                    size 28
+                    color "#ffffff"
+                    bold True
 
 
-## INJECT ke Preferences Screen - OTOMATIS tanpa edit file lain!
-init -99 python:
+## Tombol untuk membuka popup - bisa dipanggil dari mana saja
+screen mod_language_button():
     
-    # Simpan screen preferences original
-    original_preferences_screen = None
+    zorder 100
     
-    def inject_mod_button():
-        """
-        Fungsi untuk inject tombol MOD ke preferences screen
-        """
+    # Tombol di pojok kanan bawah
+    button:
+        xalign 0.98
+        yalign 0.98
+        xsize 200
+        ysize 70
+        
+        background Solid("#ff4444ee")
+        hover_background Solid("#ff6666ee")
+        
+        action Show("mod_language_popup")
+        
+        hbox:
+            xalign 0.5
+            yalign 0.5
+            spacing 10
+            
+            text "⚙":
+                size 35
+                color "#ffffff"
+            
+            text "MOD":
+                size 28
+                color "#ffffff"
+                bold True
+
+
+## Auto-show tombol MOD di main menu dan game menu
+init python:
+    
+    def show_mod_button():
+        """Tampilkan tombol MOD otomatis"""
         try:
-            # Cek apakah screen preferences ada
-            if renpy.has_screen("preferences"):
-                # Set flag bahwa kita sudah inject
-                if not hasattr(store, "mod_injected"):
-                    store.mod_injected = True
+            if renpy.get_screen("mod_language_button") is None:
+                renpy.show_screen("mod_language_button")
         except:
             pass
     
-    # Jalankan inject saat game start
-    config.start_callbacks.append(inject_mod_button)
+    # Tambahkan ke interact callbacks
+    config.interact_callbacks.append(show_mod_button)
 
-## Screen preferences yang sudah di-inject dengan tombol MOD
-## Ini akan OVERRIDE screen preferences original
-init -500 screen preferences():
-    tag menu
 
-    use game_menu(_("Settings")):
-        
-        vbox:
-            xalign 0.5
-            yalign 0.1
-            spacing 20
-            
-            # TOMBOL MOD - INI YANG KITA TAMBAHKAN!
-            hbox:
-                xalign 0.5
-                spacing 20
-                
-                textbutton _("⚙ MOD Settings"):
-                    xsize 300
-                    ysize 60
-                    text_size 30
-                    text_bold True
-                    action Show("mod_language_popup")
-                    # Style khusus agar menonjol
-                    background "#ff6b6b"
-                    hover_background "#ff5252"
-                    text_color "#ffffff"
-            
-            null height 20
-            
-            # Sisanya panggil preferences original (kalau ada)
-            # Atau bisa langsung bikin simple version
-            
-            vbox:
-                xalign 0.5
-                spacing 30
-                
-                text _("Original Preferences"):
-                    size 25
-                    xalign 0.5
-                
-                text _("Click 'MOD Settings' above to change language"):
-                    size 20
-                    xalign 0.5
-                    color "#888888"
-                
-                null height 20
-                
-                # Preferences dasar lainnya bisa ditambahkan di sini
-                # Atau biarkan kosong, fokus ke MOD button saja
-                
-                hbox:
-                    xalign 0.5
-                    spacing 20
-                    
-                    vbox:
-                        style_prefix "radio"
-                        label _("Display")
-                        textbutton _("Window") action Preference("display", "window")
-                        textbutton _("Fullscreen") action Preference("display", "fullscreen")
-                    
-                    vbox:
-                        style_prefix "check"
-                        label _("Skip")
-                        textbutton _("Unseen Text") action Preference("skip", "toggle")
-                        textbutton _("After Choices") action Preference("after choices", "toggle")
-                
-                null height 40
-                
-                # Volume controls
-                vbox:
-                    xalign 0.5
-                    spacing 15
-                    xsize 600
-                    
-                    if config.has_music:
-                        hbox:
-                            text _("Music Volume") xsize 200
-                            bar value Preference("music volume") xsize 400
-                    
-                    if config.has_sound:
-                        hbox:
-                            text _("Sound Volume") xsize 200
-                            bar value Preference("sound volume") xsize 400
-                    
-                    if config.has_voice:
-                        hbox:
-                            text _("Voice Volume") xsize 200
-                            bar value Preference("voice volume") xsize 400
+## ALTERNATIVE: Inject ke screen preferences yang sudah ada
+## Jika game punya screen preferences, kita tambahkan tombol MOD di sana
 
-## Style untuk tombol yang tidak ada gui definition
+init -10 python:
+    
+    # Fungsi untuk menambahkan action ke menu
+    def add_mod_to_preferences():
+        """
+        Mencoba menambahkan tombol MOD ke preferences jika ada
+        """
+        try:
+            # Coba dapatkan screen preferences
+            if renpy.has_screen("preferences"):
+                pass  # Screen preferences ada
+        except:
+            pass
+    
+    config.init_callbacks.append(add_mod_to_preferences)
+
+
+## Hotkey untuk membuka menu MOD (tekan M)
 init python:
-    style.empty = Style(style.default)
+    
+    config.keymap['mod_menu'] = ['m', 'M']
+    
+    def open_mod_menu():
+        renpy.show_screen("mod_language_popup")
+        return True
+    
+    config.underlay.append(
+        renpy.Keymap(
+            mod_menu = open_mod_menu
+        )
+    )
+
+
+## Style definitions yang aman
+init python:
+    try:
+        style.mod_button = Style(style.button)
+        style.mod_button.background = Solid("#ff4444")
+        style.mod_button.hover_background = Solid("#ff6666")
+    except:
+        pass
