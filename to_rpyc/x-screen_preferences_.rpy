@@ -215,5 +215,5 @@ init -500 screen preferences():
                             bar value Preference("voice volume") xsize 400
 
 ## Style untuk tombol yang tidak ada gui definition
-style empty:
-    pass
+init python:
+    style.empty = Style(style.default)
