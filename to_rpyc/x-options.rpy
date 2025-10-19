@@ -1,9 +1,6 @@
 define config.name = _("Our Red String")
 define chapters = 14
 
-# SOLUSI: Tambahkan ini untuk bahasa default
-define config.default_language = "id"
-
 default preferences.fullscreen = True
 define gui.show_name = False
 
@@ -55,15 +52,12 @@ init python:
     else:
         pass
 
-    # HAPUS atau COMMENT bagian ini:
-    # if persistent.language is None:
-    #    renpy.change_language("id")
+    # HAPUS semua setting bahasa di init python
+    # Biarkan persistent.language = None (default English)
 
 init 999:
     python:
         update_all_gallery_images()
-
-# ... sisanya tetap sama
 
 define config.version = "v14.1.3"
 
