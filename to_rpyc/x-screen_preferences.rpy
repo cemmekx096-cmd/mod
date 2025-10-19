@@ -1,16 +1,5 @@
-
-
-
-
-
-
-
-
-
-
 init -501 screen preferences():
     tag menu
-
 
     use game_menu(_("Settings")):
         vbox:
@@ -22,12 +11,17 @@ init -501 screen preferences():
                 box_wrap True
 
                 if renpy.variant("pc"):
-
                     vbox:
                         style_prefix "radio"
                         label _("Display")
                         textbutton _("Window") action Preference("display", "window")
                         textbutton _("Fullscreen") action Preference("display", "fullscreen")
+
+                vbox:
+                    style_prefix "radio"
+                    label _("Language")
+                    textbutton _("English") action Language(None)
+                    textbutton _("Indonesia") action Language("id")
 
                 vbox:
                     style_prefix "radio"
@@ -176,4 +170,3 @@ init -1 style slider_button_text:
 
 init -1 style slider_vbox:
     xsize 675
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
