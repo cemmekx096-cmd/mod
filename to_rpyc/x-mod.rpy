@@ -170,26 +170,6 @@ init python:
     config.interact_callbacks.append(show_mod_button)
 
 
-## ALTERNATIVE: Inject ke screen preferences yang sudah ada
-## Jika game punya screen preferences, kita tambahkan tombol MOD di sana
-
-init -10 python:
-    
-    # Fungsi untuk menambahkan action ke menu
-    def add_mod_to_preferences():
-        """
-        Mencoba menambahkan tombol MOD ke preferences jika ada
-        """
-        try:
-            # Coba dapatkan screen preferences
-            if renpy.has_screen("preferences"):
-                pass  # Screen preferences ada
-        except:
-            pass
-    
-    config.init_callbacks.append(add_mod_to_preferences)
-
-
 ## Hotkey untuk membuka menu MOD (tekan M)
 init python:
     
