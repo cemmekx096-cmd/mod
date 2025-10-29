@@ -48,7 +48,7 @@ translate id strings:
 
 
     old "Placed \n\"%s\"\n on clipboard"
-    new "Placed \n\"
+    new "Menempatkan \n\"%s\"\n di papan klip"
 
 
     old "Please type plus value"
