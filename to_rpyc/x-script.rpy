@@ -40801,16 +40801,16 @@ translate id strings:
     new "Sarankan untuk membawa orang tua itu bersamamu"
 
     old "\"Hey Melinda...\""
-    new "\"
+    new "\"Hey Melinda...\""
 
     old "\"Hey Malory...\""
-    new "\"
+    new "\"Hey Malory...\""
 
     old "\"Hey Melody...\""
-    new "\"
+    new "\"Hey Melody...\""
 
     old "\"Hey Melissa...\""
-    new "\"
+    new "\"Hey Melissa...\""
 
     old "Say your understand"
     new "Katakan Anda mengerti"
