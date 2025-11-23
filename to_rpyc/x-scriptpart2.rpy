@@ -15162,7 +15162,7 @@ translate id d14nurse_ee16d7e5:
     mc "Tapi tentu saja, itu tidak bekerja dengan baik."
 
 translate id d14nurse_888b4c79:
-    mc "Seperti itu, dengan ekspresi yang sedikit bingung, seperti, "Kenapa tidak berhasil?"
+    mc "Seperti itu, dengan ekspresi yang sedikit bingung, seperti, Kenapa tidak berhasil?"
 
 translate id d14nurse_94da43d0:
     mc "Dan kemudian, setelah berpikir sejenak, tiba-tiba kamu sadar."
