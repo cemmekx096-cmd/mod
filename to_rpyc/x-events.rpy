@@ -14964,7 +14964,7 @@ translate english paris_day17_19_after_a9ae1b23:
 
 translate english paris_day17_19_after_a63ca61a:
 
-    "Dia merasakan sedikit kerinduan, berharap dia bisa terbuka pada suaminya tentang segala hal dan mendengar suaminya berkata, "Tidak apa-apa, sayang. Kita akan melalui ini bersama-sama.""
+    "Dia merasakan sedikit kerinduan, berharap dia bisa terbuka pada suaminya tentang segala hal dan mendengar suaminya berkata, "Tidak apa-apa, sayang. Kita akan melalui ini bersama-sama."
 
 
 translate english paris_day17_19_shower_e9e078d0:
