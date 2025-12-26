@@ -17,7 +17,7 @@ jobs:
           
       - name: Install Ren'Py SDK
         run: |
-          wget -q https://www.renpy.org/dl/7.6.3/renpy-8.4.1-sdk.tar.bz2
+          wget -q https://www.renpy.org/dl/8.4.1/renpy-8.4.1-sdk.tar.bz2
           tar -xf renpy-8.4.1-sdk.tar.bz2
           echo "Ren'Py SDK versi:"
           ./renpy-8.4.1-sdk/renpy.sh --version
