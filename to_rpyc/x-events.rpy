@@ -16767,7 +16767,6 @@ translate english strings:
     old "♂️ – 🧠 Я – твой шанс… (– 1 сопротивление)\n{color=#00FF00}{size=20}Только если не надела кольцо{/size}{/color}"
     new "♂️ – 🧠 I'm your chance… (–1 resistance)\n{color=#00FF00}{size=20}Only if not wearing the ring{/size}{/color}"
 
-
     old "♂️ – 👀 Ты многое позволила мне ради своей карьеры"
     new "♂️ – 👀 Anda telah membiarkan saya melakukan banyak hal untuk karier Anda"
 
